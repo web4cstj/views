@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
+html {
+    height: 100%;
+    box-sizing: border-box;
+    font-family: 'Rajdhani', sans-serif;
+}
+*, *::before, *::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+body {
+    height: 100%;
+    background-color: #334;
+    color: #fff;
+}
+.interface {
+    min-height: 100%;
+    max-width: 8in;
+    background-color: #fff;
+    color: #000;
+    margin: 0 auto;
+    padding: .5in;
+    display: flex;
+    flex-direction: column;
+}
+.interface > header {
+    border-bottom: 10px solid black;
+    order: -1000;
+}
+.interface > footer {
+    border-top: 10px solid black;
+    order: 1000;
+}
+h1,h2,h3 {
+    line-height: 1;
+    margin-top: 1em;
+}
+h2 {
+    border-bottom: 2px solid black;
+}
+ol, ul {
+    padding-left: 1.5em;
+}
+.cmd {
+    background-color: #000;
+    color: #FFF;
+    // border: 1px solid yellow;
+    padding: 0 1ch;
+    white-space: nowrap;
+}
+.fic {
+    background-color: #eee;
+    color: #000;
+    border: 1px solid #ccc;
+    padding: 0 1ch;
+    white-space: nowrap;
+}
+.vs {
+    background-color: #1e1e1e;
+    color: #c9d4d4;
+}
+.bloccode {
+    font-family: monospace;
+    padding: .5em;
+    div {
+        white-space: pre;
+    }
+}
