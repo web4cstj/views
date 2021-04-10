@@ -31,6 +31,7 @@
             <h3>Récupérer un projet de Github</h3>
             <ol>
                 <li>Télécharger ou cloner le projet sur Github. Pour l'exemple, prendre la branche "<strong>views</strong>" du dépôt suivant <a href="https://github.com/web4cstj/pokemons-laravel">https://github.com/web4cstj/pokemons-laravel</a></li>
+                <li>Ouvrir le projet dans VSCode.</li>
                 <li>Récupérer l'application Laravel à l'aide de la commande <code class="cmd">composer update</code>. Cette opération peut prendre un certain temps.</li>
                 <li>Renommer le fichier <code class="fic">.env.example</code> pour <code class="fic">.env</code>.</li>
                 <li>Régler les coordonnées de la base de données dans le fichier <code class="fic">.env</code>. Pour l'exemple, régler les informations suivantes :
@@ -39,11 +40,17 @@
                         <div>DB_DATABASE="C:\chemin\vers\le\dossier\database\mondepokemons.sqlite"</div>
                     </div>
                 </li>
+                <li>Exécuter la commande de terminal <code class="cmd">php artisan key:generate</code></li>
             </ol>
             <h3>Démarrer le serveur</h3>
             <ol>
                 <li>Exécuter la commande de terminal <code class="cmd">php artisan serve</code></li>
                 <li>Visiter l'adresse <code class="fic">http://localhost:8000</code>. En temps normal, il devrait y avoir la page d'accueil de Laravel, mais pour l'exemple "Monde Pokémons", cela affichera un message d'erreur.</li>
+            </ol>
+            <h3>Regénérer la base de données</h3>
+            <ol>
+                <li>Afin d'avoir une base de données fonctionnelle, visiter l'adresse <code class="fic">http://localhost:8000/installer</code>.</li>
+                <li>Il devrit y avoir un message indiquant que la base de données a été réinitialisée.</li>
             </ol>
             <h2>Les fichiers de template</h2>
             <p>Pour les fins du tutoriel, on a créé une série de fichiers reproduisant le fonctionnement de l'application finale.</p>
@@ -59,7 +66,7 @@
                 <li><strong>View</strong> : Portion de l'application qui gère l'affichage.</li>
                 <li><strong>Controller</strong> : Portion de l'application qui gère les actions et processus.</li>
             </ul>
-            <p>En ce qui nous concerne, seule la portion View nous concerne.</p>
+            <p>En ce qui nous concerne, seule la portion View nous importe.</p>
             <h2>Les views en général</h2>
             <ul>
                 <li>Laravel utilise un système de template appelé Blade.</li></li>
@@ -84,7 +91,7 @@
                 </li>
             </ul>
             <h3>La view la plus simple (pas de html)</h3>
-            <p>Une view, c'est ce que ressemble le plus à une page HTML en Laravel.</p>
+            <p>Une view, c'est ce qui ressemble le plus à une page HTML en Laravel.</p>
             <ol>
                 <li>Visiter l'adresse <code class="fic">http://localhost:8000/pokemon</code>. Il devrait y avoir une erreur indiquant qu'il manque une view.</li>
                 <li>Créer un dossier <code class="fic">pokemon</code> dans le dossier <code class="fic">views</code>.</li>
@@ -114,9 +121,47 @@
                 <li>On a maintenant la liste des noms des 20 premiers pokémons avec le bon HTML (voir la source)</li>
             </ol>
             <h3>Les types de données et comment les afficher</h3>
-            <h2>Normaliser une view</h2>
-            <h2>La distinction contenu-contenant</h2>
+            <ul>
+                <li>On remarque dans l'exemple précédent que l'affichage d'une variable se fait à l'aide des doubles-accolades {{}}.</li>
+                <li>On remarque également qu'en PHP les variables sont précédées du signe de dollar $.</li>
+                <li>Ce qui se trouve entre les {{}} doit être une expression PHP dont la valeur sera affichée à l'endroit même à l'emplacement même.</li>
+                <li>Les variables peuvent être de différents types qui ont chacun leur façon d'être appelés. Voici les plus communs :
+                    <ul>
+                        <li>Une données scalaire tel in integer ou un string n'a besoin que du nom de la variable : <code>{{$variable}}</code></li>
+                        <li>Un tableau a besoin qu'on lui fournisse une clé (numérique ou textuelle) : <code>{{$variable['cle']}}</code></li>
+                        <li>Un objet a besoin qu'on fournisse le nom d'une propriété ou d'une méthode : <code>{{$variable->propriete}}</code></li>
+                    </ul>
+                </li>
+            </ul>
             <h2>La page maîtresse</h2>
+            <p>Afin d'éviter de répéter la même mise en forme sur toutes nos différentes pages, on va créer une page maîtresse qui contiendra le code html qui se retrouve sur toutes nos pages. On va ensuite créer une view qui appellera cette page maîtresse.</p>
+            <ol>
+                <li>Dans la view <code class="fic">pokemon.index</code>, supprimer le contenu et ajouter le code suivant : <code class="vs">@extends('layout.index')</code></li>
+                <li>Créer la view <code class="fic">layout.index</code>, c-à-d : Un fichier <code class="fic">resources/views/layout/index.blade.php</code>. Il s'agit de la page maîtresse.</li>
+                <li>Dans cette view, ajouter le code qui se trouve dans le fichier <code class="fic">_temporaire/templates/pokemon_index.html</code></li>
+                <li>Visiter l'adresse <code class="fic">http://localhost:8000/pokemon</code>. Il devrait y avoir une page statique avec 3 pokémons, mais sans CSS.</li>
+                <li>Copier le fichier <code class="fic">_temporaire/templates/pokemon.css</code> dans le dossier <code class="fic">public/css</code></li>
+                <li>Faire de même avec le fichier <code class="fic">Pokemon Solid.ttf</code></li>
+                <li>Dans la page maîtresse, remplacer l'adresse de la feuille de style par le code suivant : <code class="vs">{{asset('css/pokemon.css')}}</code></li>
+                <li>Déplacer le code html correspondant aux sélecteurs suivants de la page maîtresse vers la view <code class="fic">pokemon.index</code> : <code class="fic">#app>nav>ul:last-child</code> et <code class="fic">div.liste</code> et laisser à leur place les codes suivants respectivement : <code class="vs">@yield('menu-secondaire')</code> et <code class="vs">@yield('contenu')</code></li>
+                <li>La page devrait maintenant afficher le contenu <strong>avant</strong> le reste de la page. Il reste à le placer au bon endroit.</li>
+                <li>Dans <code class="fic">pokemon.index</code>, envelopper le <code>ul</code> des codes suivants : <code class="vs">@section('menu-secondaire')</code> (avant) et <code class="vs">@endsection</code> (après).</li>
+                <li>Envelopper le <code>div.liste</code> des codes suivants : <code class="vs">@section('contenu')</code> et <code class="vs">@endsection</code></li>
+                <li>La page est maintenant fonctionnelle.</li>
+            </ol>
+            <h2>Les adresses en Laravel</h2>
+            <p>En Laravel, on ne doit jamais utiliser une adresse locale telle quelle. On doit toujours utiliser une fonction qui a comme effet de rendre l'adresse absolue en fonction de l'action que l'on veut exécuter.</p>
+            <ol>
+                <li>Dans <code class="fic">layout.index</code>, repérer les 2 adresses qui s'y trouvent</li>
+                <li>Remplacer la première par le code suivant : <code class="vs">{{action('PokemonController@index')}}</code></li>
+                <li>Remplacer la deuxième par le code suivant : <code class="vs">{{action('TalentController@index')}}</code></li>
+                <li>En gros, ce code dit <q>Donne-moi l'adresse qui permet de faire afficher la liste (index) des Pokémons (PokemonController)</q></li>
+            </ol>
+            <h2>Les données dans la view</h2>
+            
+            <h2>Normaliser une view</h2>
+
+            <h2>La distinction contenu-contenant</h2>
             <h2>Structures dans les views</h2>
             Référence : https://summerblue.github.io/laravel5-cheatsheet/#blade
         </div>

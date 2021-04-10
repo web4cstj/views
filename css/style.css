@@ -91,4 +91,9 @@ ol, ul {
 .bloccode div {
   white-space: pre;
 }
+
+q {
+  font-family: 'Times New Roman', Times, serif;
+  font-style: italic;
+}
 /*# sourceMappingURL=style.css.map */
