@@ -14,7 +14,7 @@
         </header>
         <footer>&copy; Cégep de Saint-Jérôme &mdash; Département des techniques d'intégration multimédia</footer>
         <div class="body">
-            <h2>Installer un projet laravel</h2>
+            <h2>Installer un projet Laravel</h2>
             <h3>Installer WampServer</h3>
             <p>Wampserver est une série d'applications permettant de simuler une serveur Web sur sa propre machine.</p>
             <ol>
@@ -50,7 +50,7 @@
             <h3>Regénérer la base de données</h3>
             <ol>
                 <li>Afin d'avoir une base de données fonctionnelle, visiter l'adresse <code class="fic">http://localhost:8000/installer</code>.</li>
-                <li>Il devrit y avoir un message indiquant que la base de données a été réinitialisée.</li>
+                <li>Il devrait y avoir un message indiquant que la base de données a été réinitialisée.</li>
             </ol>
             <h2>Les fichiers de template</h2>
             <p>Pour les fins du tutoriel, on a créé une série de fichiers reproduisant le fonctionnement de l'application finale.</p>
@@ -101,7 +101,7 @@
                 <li>Visionner le code source de la page, il devrait être écrit <code>allo</code> (pas de code HTML supplémentaire)</li>
             </ol>
             <h3>On ajoute une variable</h3>
-            <p>Presque toutes les views recevront &ndash; soit d'un controller, soit d'une autre view &ndash; une série de variables que l'on doit habituellement uiliser pour faire afficher les données.</p>
+            <p>Presque toutes les views recevront &ndash; soit d'un controller, soit d'une autre view &ndash; une série de variables que l'on doit habituellement utiliser pour faire afficher les données.</p>
             <ol>
                 <li>Dans la view, ajouter le code suivant : <code class="vs">{{$pokemons}}</code></li>
                 <li>Tester la page. Il devrait y avoir un JSON contenant les 20 premiers pokémons.</li>
@@ -127,7 +127,7 @@
                 <li>Ce qui se trouve entre les {{}} doit être une expression PHP dont la valeur sera affichée à l'endroit même à l'emplacement même.</li>
                 <li>Les variables peuvent être de différents types qui ont chacun leur façon d'être appelés. Voici les plus communs :
                     <ul>
-                        <li>Une données scalaire tel in integer ou un string n'a besoin que du nom de la variable : <code>{{$variable}}</code></li>
+                        <li>Une données scalaire tel un integer ou un string n'a besoin que du nom de la variable : <code>{{$variable}}</code></li>
                         <li>Un tableau a besoin qu'on lui fournisse une clé (numérique ou textuelle) : <code>{{$variable['cle']}}</code></li>
                         <li>Un objet a besoin qu'on fournisse le nom d'une propriété ou d'une méthode : <code>{{$variable->propriete}}</code></li>
                     </ul>
@@ -166,8 +166,8 @@
                 <li>En testant, on devrait avoir 20 fois le même Pokémon qui s'affiche.</li>
                 <li>Dans le 2e <code>td</code>, remplacer le nom du pokémon par <code class="vs">{{$pokemon->nom_fr}}</code></li>
                 <li>Faire de même pour le 3e <code>td</code>. Les noms sont maintenant différents pour chaque Pokémon.</li>
-                <li>Dans le premier et le deuxième <code>td</code>, il y a le chiffre 1. Remplacez les par le code suivant : <code class="vs">{{intval($pokemon->numero)}}</code></li>
-                <li>Finalement, remplacez l'adresse du lien par le code suivant : <code class="vs">{{action('PokemonController@show', $pokemon)}}</code></li>
+                <li>Dans le premier et le deuxième <code>td</code>, il y a le chiffre 1. Les Remplacer par le code suivant : <code class="vs">{{intval($pokemon->numero)}}</code></li>
+                <li>Finalement, remplacer l'adresse du lien par le code suivant : <code class="vs">{{action('PokemonController@show', $pokemon)}}</code></li>
                 <li>Voilà! Tous les Pokémons ont une image, un nom et une adresse différents.</li>
             </ol>
             <h2>Normaliser une view</h2>
@@ -175,7 +175,7 @@
             <ol>
                 <li>Dans le dossier <code class="fic">resources/views/layout</code>, créer les fichiers <code class="fic">header.blade.php</code>, <code class="fic">footer.blade.php</code> et <code class="fic">nav.blade.php</code></li>
                 <li>Dans chaque fichier, mettre le code respectif provenant de la page maîtresse (<code class="fic">layout.index</code>).</li>
-                <li>À la place de chacune des sections, placer le code suivant : <code class="vs">@include('layout.header')</code>, <code class="vs">@include('layout.footer')</code> et<code class="vs">@include('layout.nav')</code></li>
+                <li>À la place de chacune des sections, placer le code suivant : <code class="vs">@include('layout.header')</code>, <code class="vs">@include('layout.footer')</code> et <code class="vs">@include('layout.nav')</code></li>
             </ol>
             <h2>Une autre page</h2>
             <ol>
@@ -185,7 +185,7 @@
                 <li>Ne prendre que le contenu (pas l'interface) de la page <code class="fic">pokemon_show</code> et le mettre dans la view.</li>
                 <li>Créer les sections</li>
                 <li>Arranger les adresses</li>
-                <li>Remplacer les données bidons par des variables. Utiliser les propriétés suivantes :
+                <li>Remplacer les données bidon par des variables. Utiliser les propriétés suivantes :
                     <ul>
                         <li>numero</li>
                         <li>nom_fr</li>
@@ -202,9 +202,13 @@
                     </ul>
                 </li>
             </ol>
-            <h2>La distinction contenu-contenant</h2>
-            <h2>Structures dans les views</h2>
-            Référence : https://summerblue.github.io/laravel5-cheatsheet/#blade
+            <!-- <h2>Structures dans les views</h2> -->
+            <h2>Références</h2>
+            <ul>
+                <li>Officiel : <a target="_blank" href="https://laravel.com/docs/5.4/views">https://laravel.com/docs/5.4/views</a></li>
+                <li>Cheatsheet : <a target="_blank" href="https://summerblue.github.io/laravel5-cheatsheet/#blade">https://summerblue.github.io/laravel5-cheatsheet/#blade</a></li>
+            </ul>
+            <p></p>
         </div>
     </div>
 
